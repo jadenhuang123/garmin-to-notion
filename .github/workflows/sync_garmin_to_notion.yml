@@ -43,6 +43,8 @@ jobs:
           GARMIN_ACTIVITIES_FETCH_LIMIT: ${{ vars.GARMIN_ACTIVITIES_FETCH_LIMIT }}
           TZ: 'America/Montreal'
         run: |
+          python -c "import os; print(f'Email length: {len(os.getenv(\"GARMIN_EMAIL\", \"\"))}')"
+          python garmin-activities.py
           python garmin-activities.py
           python personal-records.py
           python daily-steps.py
