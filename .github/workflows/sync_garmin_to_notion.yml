@@ -33,6 +33,7 @@ jobs:
 
       - name: Run script
         env:
+          # 直接強制引用
           GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
           GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
@@ -40,11 +41,9 @@ jobs:
           NOTION_PR_DB_ID: ${{ secrets.NOTION_PR_DB_ID }}
           NOTION_STEPS_DB_ID: ${{ secrets.NOTION_STEPS_DB_ID }}
           NOTION_SLEEP_DB_ID: ${{ secrets.NOTION_SLEEP_DB_ID }}
-          GARMIN_ACTIVITIES_FETCH_LIMIT: ${{ vars.GARMIN_ACTIVITIES_FETCH_LIMIT }}
-          TZ: 'America/Montreal'
         run: |
+          # 增加偵錯行，看看到底讀到了沒 (這不會印出你的密碼，只會印出長度)
           python -c "import os; print(f'Email length: {len(os.getenv(\"GARMIN_EMAIL\", \"\"))}')"
-          python garmin-activities.py
           python garmin-activities.py
           python personal-records.py
           python daily-steps.py
